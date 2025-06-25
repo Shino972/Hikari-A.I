@@ -10,18 +10,103 @@
     "chi": "語言已設置：中文 🇨🇳"
   },
   "welcome": {
-    "rus": "Добро пожаловать в наш бот!",
-    "eng": "Welcome to our bot!",
-    "chi": "歡迎使用我們的機器人！"
+    "rus": "🤖 Я — <b>Hikari A.I.</b>\nУмный, стильный и немного дерзкий Telegram-бот, который умеет:\n• Делать яркие дайджесты чатов \n• Анализировать атмосферу группы \n• Подстраиваться под стиль общения \n\nДобавь меня в группу — и я покажу, на что способен!",
+    "eng": "🤖 I'm <b>Hikari A.I.</b>\nA smart, stylish, and slightly cheeky Telegram bot who can:\n• Create vivid chat digests \n• Analyze group vibes \n• Adapt to your group’s tone and humor \n\nAdd me to your group and see the magic!",
+    "chi": "🤖 我是 <b>Hikari A.I.</b>\n一個聰明、有型又有點調皮的 Telegram 機器人，能夠：\n• 生成精彩的聊天摘要 \n• 分析群組氛圍 \n• 自動適應你們的聊天風格 \n\n把我加進群組，讓我們開始吧！"
   },
   "kb_add_to_group": {
-    "rus": "Добавить в группу",
-    "eng": "Add to group",
-    "chi": "添加到群組"
+    "rus": "➕ Добавить в группу",
+    "eng": "➕ Add to group",
+    "chi": "➕ 添加到群組"
   },
-    "group_me_welcome": {
-    "rus": "🎉 <a href=\"tg://user?id={user_id}\"><b>{first_name}</b></a>, Спасибо, что добавили меня в группу!",
-    "eng": "🎉 <a href=\"tg://user?id={user_id}\"><b>{first_name}</b></a>, Thank you for adding me to the group!",
-    "chi": "🎉 <a href=\"tg://user?id={user_id}\"><b>{first_name}</b></a>, 感謝您將我添加到群組！"
-    }
+  "group_me_welcome": {
+  "rus": "🎉 <a href=\"tg://user?id={user_id}\"><b>{first_name}</b></a>, Спасибо, что добавили меня в группу!",
+  "eng": "🎉 <a href=\"tg://user?id={user_id}\"><b>{first_name}</b></a>, Thank you for adding me to the group!",
+  "chi": "🎉 <a href=\"tg://user?id={user_id}\"><b>{first_name}</b></a>, 感謝您將我添加到群組！"
+  },
+  "admin_panel": {
+    "eng": "🛠 Welcome to the admin panel.",
+    "rus": "🛠 Добро пожаловать в админ-панель.",
+    "chi": "🛠 歡迎進入管理員面板。"
+  },
+  "admin_stats": {
+    "eng": "👤 Users: {users}\n👥 Active groups: {active_groups}\n🔕 Inactive groups: {inactive_groups}\n📊 Total groups: {total_groups}",
+    "rus": "👤 Пользователей: {users}\n👥 Активных групп: {active_groups}\n🔕 Неактивных групп: {inactive_groups}\n📊 Всего групп: {total_groups}",
+    "chi": "👤 用戶: {users}\n👥 活躍群組: {active_groups}\n🔕 非活躍群組: {inactive_groups}\n📊 總群組數: {total_groups}"
+  },
+  "admin_broadcast_button": {
+    "eng": "📢 Broadcast",
+    "rus": "📢 Рассылка",
+    "chi": "📢 廣播"
+  },
+  "broadcast_choose_target": {
+    "eng": "Select the audience for broadcast:",
+    "rus": "Выберите получателей рассылки:",
+    "chi": "選擇廣播目標："
+  },
+  "broadcast_users": {
+    "eng": "👤 Users",
+    "rus": "👤 Личка",
+    "chi": "👤 私人"
+  },
+  "broadcast_groups": {
+    "eng": "👥 Groups",
+    "rus": "👥 Группы",
+    "chi": "👥 群組"
+  },
+  "cancel": {
+    "eng": "❌ Cancel",
+    "rus": "❌ Отмена",
+    "chi": "❌ 取消"
+  },
+  "broadcast_ask_content": {
+    "rus": "✉️ Пожалуйста, отправьте сообщение, которое вы хотите разослать пользователям.",
+    "eng": "✉️ Please send the message you want to broadcast to users.",
+    "chi": "✉️ 請發送您要發送給用戶的消息。"
+  },
+  "confirm": {
+    "rus": "✅ Подтвердить",
+    "eng": "✅ Confirm",
+    "chi": "✅ 確認"
+  },
+  "broadcast_done": {
+    "rus": "📬 Рассылка завершена.\n✅ Успешно: {success}\n❌ Ошибок: {failed}",
+    "eng": "📬 Broadcast finished.\n✅ Sent: {success}\n❌ Failed: {failed}",
+    "chi": "📬 群發完成。\n✅ 成功: {success}\n❌ 失敗: {failed}"
+  },
+  "not_enough_messages": {
+    "rus": "❌ Недостаточно сообщений для дайджеста!\nСобрано: {count}/100\nНужно еще: {needed}",
+    "eng": "❌ Not enough messages for digest!\nCollected: {count}/100\nStill need: {needed}",
+    "chi": "❌ 群聊消息不足以生成摘要！\n已收集: {count}/100\n還需要: {needed}"
+  },
+  "digest_generating": {
+    "rus": "🔄 Генерирую дайджест...",
+    "eng": "🔄 Generating digest...",
+    "chi": "🔄 正在生成摘要..."
+  },
+  "digest_cooldown": {
+    "rus": "⏳ Следующий дайджест будет доступен через {hours}ч {minutes}м",
+    "eng": "⏳ Next digest will be available in {hours}h {minutes}m",
+    "chi": "⏳ 下一次摘要将在{hours}小时{minutes}分钟后可用"
+  },
+  "gender_current": {
+      "rus": "Ваш текущий пол: {gender}",
+      "eng": "Your current gender: {gender}",
+      "chi": "你目前的性别是：{gender}"
+  },
+  "gender_auto": {
+      "rus": "Авто",
+      "eng": "Auto",
+      "chi": "自動"
+  },
+  "gender_male": {
+      "rus": "Мужской",
+      "eng": "Male",
+      "chi": "男"
+  },
+  "gender_female": {
+      "rus": "Женский",
+      "eng": "Female",
+      "chi": "女"
+  }
 }

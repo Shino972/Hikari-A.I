@@ -18,3 +18,16 @@ async def get_user_lang(user_id: int) -> str:
         cursor = await db.execute("SELECT lang FROM users WHERE id = ?", (user_id,))
         result = await cursor.fetchone()
         return result[0] if result else "eng"
+
+async def count_users():
+    async with aiosqlite.connect("users.db") as db:
+        async with db.execute("SELECT COUNT(*) FROM users") as cursor:
+            result = await cursor.fetchone()
+            return result[0] if result else 0
+        
+async def get_all_users():
+    import aiosqlite
+    async with aiosqlite.connect("users.db") as db:
+        cursor = await db.execute("SELECT id FROM users")
+        rows = await cursor.fetchall()
+        return [row[0] for row in rows]

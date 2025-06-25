@@ -25,4 +25,4 @@ async def private_message_handler(message: types.Message):
             reply_markup=kb.as_markup()
         )
     except Exception as e:
-        pass
+        print(f"[private_message_handler error] {e}")

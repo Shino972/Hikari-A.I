@@ -29,4 +29,4 @@ async def language_selected(callback: types.CallbackQuery, bot: Bot):
         await callback.answer(t("language_selected", lang))
 
     except Exception as e:
-        print(f"39 - lang.py: {e}")
+        print(f"[language_selected error]: {e}")

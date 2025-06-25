@@ -1,0 +1,43 @@
+from aiogram import Router, types, F
+from datetime import datetime
+from db.json_storage import save_message_entry
+from aiogram.types import ChatMemberAdministrator, ChatMemberOwner
+
+router = Router()
+
+@router.message(F.chat.type.in_({"group", "supergroup"}))
+async def handle_group_message(message: types.Message, bot):
+    if not message.text:
+        return
+
+    user = message.from_user
+    chat_id = message.chat.id
+
+    try:
+        member = await bot.get_chat_member(chat_id, user.id)
+        is_admin = isinstance(member, (ChatMemberAdministrator, ChatMemberOwner))
+    except:
+        is_admin = False
+
+    reply_data = None
+    if message.reply_to_message:
+        replied_user = message.reply_to_message.from_user
+        reply_data = {
+            "full_name": replied_user.full_name,
+            "username": replied_user.username,
+            "content": message.reply_to_message.text or ""
+        }
+
+    entry = {
+        "chat_id": chat_id,
+        "user_id": user.id,
+        "full_name": user.full_name,
+        "username": user.username,
+        "gender": None,
+        "is_admin": is_admin,
+        "timestamp": message.date.strftime("%d.%m.%Y %H:%M"),
+        "content": message.text,
+        "reply_to": reply_data
+    }
+
+    save_message_entry(entry)
