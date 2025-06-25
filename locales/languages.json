@@ -1,0 +1,27 @@
+{
+  "start": {
+    "rus": "<code>👋 Привет! Выберите язык интерфейса.</code>",
+    "eng": "👋 Hello! Choose your language.",
+    "chi": "👋 選擇語言"
+  },
+  "language_selected": {
+    "rus": "Язык установлен: Русский 🇷🇺",
+    "eng": "Language set: English 🇬🇧",
+    "chi": "語言已設置：中文 🇨🇳"
+  },
+  "welcome": {
+    "rus": "Добро пожаловать в наш бот!",
+    "eng": "Welcome to our bot!",
+    "chi": "歡迎使用我們的機器人！"
+  },
+  "kb_add_to_group": {
+    "rus": "Добавить в группу",
+    "eng": "Add to group",
+    "chi": "添加到群組"
+  },
+    "group_me_welcome": {
+    "rus": "🎉 <a href=\"tg://user?id={user_id}\"><b>{first_name}</b></a>, Спасибо, что добавили меня в группу!",
+    "eng": "🎉 <a href=\"tg://user?id={user_id}\"><b>{first_name}</b></a>, Thank you for adding me to the group!",
+    "chi": "🎉 <a href=\"tg://user?id={user_id}\"><b>{first_name}</b></a>, 感謝您將我添加到群組！"
+    }
+}
