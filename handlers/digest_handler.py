@@ -42,7 +42,7 @@ async def manual_digest(message: types.Message):
         )
         return
 
-    await message.answer(t("digest_generating", lang))
+    generating_message = await message.answer(t("digest_generating", lang))
 
     try:
         digest = await generate_digest(message.chat.id)
@@ -57,13 +57,16 @@ async def manual_digest(message: types.Message):
                         await message.bot.pin_chat_message(
                             chat_id=message.chat.id,
                             message_id=sent_message.message_id,
-                            disable_notification=True
+                            disable_notification=False, web_page_preview=False
                         )
                         first_message_sent = True
                     except Exception as pin_error:
                         print(f"Failed to pin message: {pin_error}")
                         first_message_sent = True
                 await sleep(0.5)
+            
+            await generating_message.delete()
+            
     except Exception as e:
         await message.answer(t("digest_error", lang))
         print(f"[manual_digest] error in {message.chat.id}: {e}")

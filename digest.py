@@ -44,12 +44,17 @@ async def generate_digest(chat_id: int):
     
     if not Path(prompt_file).exists():
         prompt_file = "prompts/prompt_eng.txt"
-    
-    with open("messages.json", "r", encoding="utf-8") as msg_file:
-        message_data = json.load(msg_file)
-        chat_messages = [msg for msg in message_data if msg.get("chat_id") == chat_id]
-        user_messages = "\n".join(msg["content"] for msg in chat_messages if "content" in msg)
 
+    def sanitize_message(msg):
+        sanitized = msg.copy()
+        sanitized.pop("chat_id", None)
+        sanitized.pop("user_id", None)
+        if "reply_to" in sanitized and isinstance(sanitized["reply_to"], dict):
+            sanitized["reply_to"].pop("user_id", None)
+        return sanitized
+
+    sanitized_messages = [sanitize_message(msg) for msg in chat_messages]
+    
     client = AsyncOpenAI(
         api_key=OPENAI_API_KEY,
         base_url=OPENAI_BASE_URL
@@ -60,7 +65,7 @@ async def generate_digest(chat_id: int):
 
     messages = [
         {"role": "system", "content": prompt_text},
-        {"role": "user", "content": user_messages}
+        {"role": "user", "content": json.dumps(sanitized_messages, ensure_ascii=False)}
     ]
 
     response = await client.chat.completions.create(
@@ -70,7 +75,6 @@ async def generate_digest(chat_id: int):
         top_p=0.95,
         max_tokens=8192
     )
-
     clear_processed_messages(chat_id)
     return response.choices[0].message.content
 
@@ -93,7 +97,7 @@ async def digest_scheduler(bot: Bot):
                                 await bot.pin_chat_message(
                                     chat_id=chat_id,
                                     message_id=sent_message.message_id,
-                                    disable_notification=True
+                                    disable_notification=False, web_page_preview=False
                                 )
                                 first_message_sent = True
                             except Exception as pin_error:

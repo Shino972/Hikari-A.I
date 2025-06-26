@@ -9,10 +9,10 @@
     "eng": "<b>Language set: English 🇬🇧</b>",
     "chi": "<b>語言已設置：中文 🇨🇳</b>"
   },
-  "welcome": {
-    "rus": "🤖 Я — <b>Hikari A.I.</b>\nУмный, стильный и немного дерзкий Telegram-бот, который умеет:\n• Делать яркие дайджесты чатов \n• Анализировать атмосферу группы \n• Подстраиваться под стиль общения \n\nДобавь меня в группу — и я покажу, на что способен!",
-    "eng": "🤖 I'm <b>Hikari A.I.</b>\nA smart, stylish, and slightly cheeky Telegram bot who can:\n• Create vivid chat digests \n• Analyze group vibes \n• Adapt to your group’s tone and humor \n\nAdd me to your group and see the magic!",
-    "chi": "🤖 我是 <b>Hikari A.I.</b>\n一個聰明、有型又有點調皮的 Telegram 機器人，能夠：\n• 生成精彩的聊天摘要 \n• 分析群組氛圍 \n• 自動適應你們的聊天風格 \n\n把我加進群組，讓我們開始吧！"
+  "welcome": {  
+    "rus": "🤖 Я — <b>Hikari A.I.</b>\nУмный, стильный Развлекательный Бот, который умеет:\n• Делать яркие дайджесты чатов \n• Анализировать атмосферу группы \n• Подстраиваться под стиль общения \n\nЯ каждые 24 часа выкладываю дайджест, изучая 1000 последних сообщений чата!\n Добавь меня в группу — и я покажу, на что способен!",  
+    "eng": "🤖 I am <b>Hikari A.I.</b>\nA smart, stylish, and entertaining bot that can:\n• Create vibrant chat digests \n• Analyze the group's atmosphere \n• Adapt to the communication style \n\nI post a digest every 24 hours, analyzing the last 1000 messages in the chat!\n Add me to a group — and I'll show you what I can do!",  
+    "chi": "🤖 我是 <b>Hikari A.I.</b>\n一个智能、时尚且有趣的机器人，我能：\n• 制作精彩的聊天摘要 \n• 分析群组氛围 \n• 适应聊天风格 \n\n我会每24小时发布一次摘要，分析最近1000条消息！\n 把我加入群组——我会让你看看我的本事！"  
   },
   "kb_add_to_group": {
     "rus": "➕ Добавить в группу",
@@ -20,9 +20,9 @@
     "chi": "➕ 添加到群組"
   },
   "group_me_welcome": {
-  "rus": "🎉 <a href=\"tg://user?id={user_id}\"><b>{first_name}</b></a>, Спасибо, что добавили меня в группу! \n\n🤖 Я — <b>Hikari A.I.</b>\nУмный, стильный и немного дерзкий Telegram-бот, который умеет:\n• Делать яркие дайджесты чатов \n• Анализировать атмосферу группы \n• Подстраиваться под стиль общения",
-  "eng": "🎉 <a href=\"tg://user?id={user_id}\"><b>{first_name}</b></a>, Thank you for adding me to the group! \n\n🤖 I'm <b>Hikari A.I.</b>\nA smart, stylish, and slightly cheeky Telegram bot who can:\n• Create vivid chat digests \n• Analyze group vibes \n• Adapt to your group’s tone and humor",
-  "chi": "🎉 <a href=\"tg://user?id={user_id}\"><b>{first_name}</b></a>, 感謝您將我添加到群組！\n\n🤖 我是 <b>Hikari A.I.</b>\n一個聰明、有型又有點調皮的 Telegram 機器人，能夠：\n• 生成精彩的聊天摘要 \n• 分析群組氛圍 \n• 自動適應你們的聊天風格"
+    "rus": "🎉 <a href=\"tg://user?id={user_id}\"><b>{first_name}</b></a>, Спасибо, что добавили меня в группу! \n\n🤖 Я — <b>Hikari A.I.</b>\nУмный, стильный Развлекательный Бот, который умеет:\n• Делать яркие дайджесты чатов \n• Анализировать атмосферу группы \n• Подстраиваться под стиль общения\n\nТеперь я каждые 24 часа выкладываю дайджест, изучая 1000 последних сообщений чата!",
+    "eng": "🎉 <a href=\"tg://user?id={user_id}\"><b>{first_name}</b></a>, thank you for adding me to the group! \n\n🤖 I am <b>Hikari A.I.</b>\nA smart, stylish, and entertaining bot that can:\n• Create vibrant chat digests \n• Analyze the group's atmosphere \n• Adapt to the communication style\n\nNow, I post a digest every 24 hours, analyzing the last 1000 messages in the chat!",
+    "chi": "🎉 <a href=\"tg://user?id={user_id}\"><b>{first_name}</b></a>，感谢您将我添加到群组中！\n\n🤖 我是 <b>Hikari A.I.</b>\n一个智能、时尚且有趣的机器人，我能：\n• 制作精彩的聊天摘要 \n• 分析群组氛围 \n• 适应聊天风格\n\n现在，我会每24小时发布一次摘要，分析最近1000条消息！"
   },
   "admin_panel": {
     "eng": "🛠 Welcome to the admin panel.",
