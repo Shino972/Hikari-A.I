@@ -17,7 +17,6 @@ async def manual_digest(message: types.Message):
     lang = await get_group_lang(message.chat.id) or "eng"
 
     if generating_digests.get(message.chat.id, False):
-        await message.answer(t("digest_already_generating", lang))
         return
 
     cooldown = await check_cooldown(message.chat.id, "digest")
@@ -38,13 +37,6 @@ async def manual_digest(message: types.Message):
             t("not_enough_messages", lang,
               count=chat_msg_count,
               needed=100 - chat_msg_count)
-        )
-        return
-
-    total_length = sum(len(msg.get("content", "")) for msg in chat_messages)
-    if total_length > 30000:
-        await message.answer(
-            t("digest_too_long", lang, symbols=total_length, max_symbols=30000)
         )
         return
 
