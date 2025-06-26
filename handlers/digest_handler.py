@@ -10,9 +10,15 @@ from db.cooldown import set_cooldown, check_cooldown
 
 router = Router()
 
+generating_digests = {}
+
 @router.message(Command("digest"))
 async def manual_digest(message: types.Message):
     lang = await get_group_lang(message.chat.id) or "eng"
+
+    if generating_digests.get(message.chat.id, False):
+        await message.answer(t("digest_already_generating", lang))
+        return
 
     cooldown = await check_cooldown(message.chat.id, "digest")
     if cooldown > 0:
@@ -42,6 +48,8 @@ async def manual_digest(message: types.Message):
         )
         return
 
+    generating_digests[message.chat.id] = True
+
     generating_message = await message.answer(t("digest_generating", lang))
 
     try:
@@ -70,3 +78,5 @@ async def manual_digest(message: types.Message):
     except Exception as e:
         await message.answer(t("digest_error", lang))
         print(f"[manual_digest] error in {message.chat.id}: {e}")
+    finally:
+        generating_digests.pop(message.chat.id, None)
