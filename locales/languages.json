@@ -1,13 +1,13 @@
 {
   "start": {
-    "rus": "<code>👋 Привет! Выберите язык интерфейса.</code>",
-    "eng": "👋 Hello! Choose your language.",
-    "chi": "👋 選擇語言"
+    "rus": "<b>👋 Привет! Выберите язык интерфейса.</b>",
+    "eng": "<b>👋 Hello! Choose your language.</b>",
+    "chi": "<b>👋 選擇語言</b>"
   },
   "language_selected": {
-    "rus": "Язык установлен: Русский 🇷🇺",
-    "eng": "Language set: English 🇬🇧",
-    "chi": "語言已設置：中文 🇨🇳"
+    "rus": "<b>Язык установлен: Русский 🇷🇺</b>",
+    "eng": "<b>Language set: English 🇬🇧</b>",
+    "chi": "<b>語言已設置：中文 🇨🇳</b>"
   },
   "welcome": {
     "rus": "🤖 Я — <b>Hikari A.I.</b>\nУмный, стильный и немного дерзкий Telegram-бот, который умеет:\n• Делать яркие дайджесты чатов \n• Анализировать атмосферу группы \n• Подстраиваться под стиль общения \n\nДобавь меня в группу — и я покажу, на что способен!",
@@ -20,9 +20,9 @@
     "chi": "➕ 添加到群組"
   },
   "group_me_welcome": {
-  "rus": "🎉 <a href=\"tg://user?id={user_id}\"><b>{first_name}</b></a>, Спасибо, что добавили меня в группу!",
-  "eng": "🎉 <a href=\"tg://user?id={user_id}\"><b>{first_name}</b></a>, Thank you for adding me to the group!",
-  "chi": "🎉 <a href=\"tg://user?id={user_id}\"><b>{first_name}</b></a>, 感謝您將我添加到群組！"
+  "rus": "🎉 <a href=\"tg://user?id={user_id}\"><b>{first_name}</b></a>, Спасибо, что добавили меня в группу! \n\n🤖 Я — <b>Hikari A.I.</b>\nУмный, стильный и немного дерзкий Telegram-бот, который умеет:\n• Делать яркие дайджесты чатов \n• Анализировать атмосферу группы \n• Подстраиваться под стиль общения",
+  "eng": "🎉 <a href=\"tg://user?id={user_id}\"><b>{first_name}</b></a>, Thank you for adding me to the group! \n\n🤖 I'm <b>Hikari A.I.</b>\nA smart, stylish, and slightly cheeky Telegram bot who can:\n• Create vivid chat digests \n• Analyze group vibes \n• Adapt to your group’s tone and humor",
+  "chi": "🎉 <a href=\"tg://user?id={user_id}\"><b>{first_name}</b></a>, 感謝您將我添加到群組！\n\n🤖 我是 <b>Hikari A.I.</b>\n一個聰明、有型又有點調皮的 Telegram 機器人，能夠：\n• 生成精彩的聊天摘要 \n• 分析群組氛圍 \n• 自動適應你們的聊天風格"
   },
   "admin_panel": {
     "eng": "🛠 Welcome to the admin panel.",
@@ -75,24 +75,24 @@
     "chi": "📬 群發完成。\n✅ 成功: {success}\n❌ 失敗: {failed}"
   },
   "not_enough_messages": {
-    "rus": "❌ Недостаточно сообщений для дайджеста!\nСобрано: {count}/100\nНужно еще: {needed}",
-    "eng": "❌ Not enough messages for digest!\nCollected: {count}/100\nStill need: {needed}",
-    "chi": "❌ 群聊消息不足以生成摘要！\n已收集: {count}/100\n還需要: {needed}"
+    "rus": "<b>❌ Недостаточно сообщений для дайджеста!\nСобрано: {count}/100\nНужно еще: {needed}</b>",
+    "eng": "<b>❌ Not enough messages for digest!\nCollected: {count}/100\nStill need: {needed}</b>",
+    "chi": "<b>❌ 群聊消息不足以生成摘要！\n已收集: {count}/100\n還需要: {needed}</b>"
   },
   "digest_generating": {
-    "rus": "🔄 Генерирую дайджест...",
-    "eng": "🔄 Generating digest...",
-    "chi": "🔄 正在生成摘要..."
+    "rus": "<b>🔄 Генерирую дайджест...</b>",
+    "eng": "<b>🔄 Generating digest...</b>",
+    "chi": "<b>🔄 正在生成摘要...</b>"
   },
   "digest_cooldown": {
-    "rus": "⏳ Следующий дайджест будет доступен через {hours}ч {minutes}м",
-    "eng": "⏳ Next digest will be available in {hours}h {minutes}m",
-    "chi": "⏳ 下一次摘要将在{hours}小时{minutes}分钟后可用"
+    "rus": "<b>⏳ Следующий дайджест будет доступен через {hours}ч {minutes}м</b>",
+    "eng": "<b>⏳ Next digest will be available in {hours}h {minutes}m</b>",
+    "chi": "<b>⏳ 下一次摘要将在{hours}小时{minutes}分钟后可用</b>"
   },
   "gender_current": {
-      "rus": "Ваш текущий пол: {gender}",
-      "eng": "Your current gender: {gender}",
-      "chi": "你目前的性别是：{gender}"
+      "rus": "<b>Ваш текущий пол: {gender}</b>",
+      "eng": "<b>Your current gender: {gender}</b>",
+      "chi": "<b>你目前的性别是：{gender}</b>"
   },
   "gender_auto": {
       "rus": "Авто",

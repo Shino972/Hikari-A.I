@@ -1,4 +1,4 @@
 aiosqlite
 aiogram
 dotenv
-google-genai
+openai

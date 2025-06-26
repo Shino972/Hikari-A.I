@@ -2,6 +2,7 @@ from aiogram import Router, types, F
 from datetime import datetime
 from db.json_storage import save_message_entry
 from aiogram.types import ChatMemberAdministrator, ChatMemberOwner
+from db.group import add_group
 
 router = Router()
 
@@ -18,6 +19,8 @@ async def handle_group_message(message: types.Message, bot):
         is_admin = isinstance(member, (ChatMemberAdministrator, ChatMemberOwner))
     except:
         is_admin = False
+
+    await add_group(chat_id=chat_id)
 
     reply_data = None
     if message.reply_to_message:

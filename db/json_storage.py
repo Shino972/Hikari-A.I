@@ -26,8 +26,21 @@ def load_messages():
 def save_messages(messages: list):
     if len(messages) > MAX_MESSAGES:
         messages = messages[-MAX_MESSAGES:]
+
+    total_length = 0
+    trimmed = []
+
+    for msg in reversed(messages):
+        content = msg.get("content", "")
+        total_length += len(content)
+        if total_length > 25000:
+            break
+        trimmed.append(msg)
+
+    trimmed = list(reversed(trimmed))
+
     with open(STORAGE_PATH, "w", encoding="utf-8") as f:
-        json.dump(messages, f, ensure_ascii=False, indent=2)
+        json.dump(trimmed, f, ensure_ascii=False, indent=2)
 
 def clear_processed_messages(chat_id: int):
     messages = load_messages()

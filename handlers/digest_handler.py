@@ -13,7 +13,7 @@ router = Router()
 @router.message(Command("digest"))
 async def manual_digest(message: types.Message):
     lang = await get_group_lang(message.chat.id) or "eng"
-    
+
     cooldown = await check_cooldown(message.chat.id, "digest")
     if cooldown > 0:
         hours = cooldown // 3600
@@ -24,7 +24,8 @@ async def manual_digest(message: types.Message):
         return
 
     messages = load_messages()
-    chat_msg_count = len([msg for msg in messages if msg.get("chat_id") == message.chat.id])
+    chat_messages = [msg for msg in messages if msg.get("chat_id") == message.chat.id]
+    chat_msg_count = len(chat_messages)
 
     if chat_msg_count < 100:
         await message.answer(
@@ -34,24 +35,34 @@ async def manual_digest(message: types.Message):
         )
         return
 
+    total_length = sum(len(msg.get("content", "")) for msg in chat_messages)
+    if total_length > 30000:
+        await message.answer(
+            t("digest_too_long", lang, symbols=total_length, max_symbols=30000)
+        )
+        return
+
     await message.answer(t("digest_generating", lang))
 
     try:
         digest = await generate_digest(message.chat.id)
         if digest:
             await set_cooldown(message.chat.id, "digest", 14400)
-            
             message_parts = await split_long_message(digest)
             first_message_sent = False
             for part in message_parts:
                 sent_message = await message.answer(part)
                 if not first_message_sent:
-                    await message.bot.pin_chat_message(
-                        chat_id=message.chat.id,
-                        message_id=sent_message.message_id,
-                        disable_notification=True
-                    )
-                    first_message_sent = True
+                    try:
+                        await message.bot.pin_chat_message(
+                            chat_id=message.chat.id,
+                            message_id=sent_message.message_id,
+                            disable_notification=True
+                        )
+                        first_message_sent = True
+                    except Exception as pin_error:
+                        print(f"Failed to pin message: {pin_error}")
+                        first_message_sent = True
                 await sleep(0.5)
     except Exception as e:
         await message.answer(t("digest_error", lang))

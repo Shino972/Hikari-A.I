@@ -4,13 +4,12 @@ import asyncio
 import math
 import time
 from asyncio import sleep
-from google import genai
-from google.genai import types
+from openai import AsyncOpenAI
 from aiogram import Bot
 
 from db.group import get_group_lang
 from db.json_storage import clear_processed_messages, load_messages
-from config import GEMINI_API_KEY
+from config import OPENAI_API_KEY, OPENAI_BASE_URL
 
 async def calculate_digest_time(chat_id: int) -> float:
     from db.group import get_group_add_time
@@ -51,35 +50,29 @@ async def generate_digest(chat_id: int):
         chat_messages = [msg for msg in message_data if msg.get("chat_id") == chat_id]
         user_messages = "\n".join(msg["content"] for msg in chat_messages if "content" in msg)
 
-    client = genai.Client(api_key=GEMINI_API_KEY)
-    model = "gemini-2.0-flash"
+    client = AsyncOpenAI(
+        api_key=OPENAI_API_KEY,
+        base_url=OPENAI_BASE_URL
+    )
 
     with open(prompt_file, "r", encoding="utf-8") as f:
         prompt_text = f.read()
 
-    contents = [
-        types.Content(
-            role="user",
-            parts=[types.Part.from_text(text=user_messages)],
-        ),
+    messages = [
+        {"role": "system", "content": prompt_text},
+        {"role": "user", "content": user_messages}
     ]
 
-    generate_content_config = types.GenerateContentConfig(
+    response = await client.chat.completions.create(
+        model="google/gemini-2.0-flash-exp:free",
+        messages=messages,
         temperature=1.0,
         top_p=0.95,
-        max_output_tokens=4096,
-        response_mime_type="text/plain",
-        system_instruction=[types.Part.from_text(text=prompt_text)],
-    )
-
-    response = client.models.generate_content(
-        model=model,
-        contents=contents,
-        config=generate_content_config,
+        max_tokens=8192
     )
 
     clear_processed_messages(chat_id)
-    return response.text
+    return response.choices[0].message.content
 
 async def digest_scheduler(bot: Bot):
     while True:
@@ -96,8 +89,16 @@ async def digest_scheduler(bot: Bot):
                     for part in message_parts:
                         sent_message = await bot.send_message(chat_id, part)
                         if not first_message_sent:
-                            await bot.pin_chat_message(chat_id, sent_message.message_id)
-                            first_message_sent = True
+                            try:
+                                await bot.pin_chat_message(
+                                    chat_id=chat_id,
+                                    message_id=sent_message.message_id,
+                                    disable_notification=True
+                                )
+                                first_message_sent = True
+                            except Exception as pin_error:
+                                print(f"Failed to pin message: {pin_error}")
+                                first_message_sent = True
                         await sleep(0.5)
             except Exception as e:
                 print(f"[digest_scheduler] error in {chat_id}: {e}")
