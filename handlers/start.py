@@ -18,7 +18,8 @@ async def private_message_handler(message: types.Message):
         kb.button(text="🇷🇺 Русский", callback_data="lang_rus")
         kb.button(text="🇬🇧 English", callback_data="lang_eng")
         kb.button(text="🇨🇳 中文", callback_data="lang_chi")
-        kb.adjust(2, 1)
+        kb.button(text="🇺🇦 Українська", callback_data="lang_ukr")
+        kb.adjust(2, 2)
 
         await message.answer(
             t("start", "eng"),

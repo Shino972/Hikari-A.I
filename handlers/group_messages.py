@@ -16,7 +16,7 @@ async def handle_group_message(message: types.Message, bot):
 
     group_lang = await get_group_lang(chat_id)
     if group_lang is None:
-        await add_group(chat_id=chat_id, lang="eng", active=True, add_time=datetime.now().timestamp())
+        await add_group(chat_id=chat_id, lang="eng", active=True, add_time=datetime.now().timestamp(), style="default")
 
     try:
         member = await bot.get_chat_member(chat_id, user.id)

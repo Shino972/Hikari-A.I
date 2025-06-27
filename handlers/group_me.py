@@ -20,7 +20,7 @@ async def group_me_welcome(event: types.ChatMemberUpdated):
 
         if new_status in [ChatMemberStatus.MEMBER, ChatMemberStatus.ADMINISTRATOR]:
             lang = await get_user_lang(user_id) or "eng"
-            await add_group(chat_id, lang, active=True)
+            await add_group(chat_id, lang, active=True, style="default")
             
             await event.bot.send_message(
                 chat_id=chat_id,

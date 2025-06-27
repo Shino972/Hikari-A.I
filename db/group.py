@@ -2,19 +2,23 @@ import aiosqlite
 import time
 
 async def add_group(
-    chat_id: int, 
-    lang: str = "eng", 
-    active: bool = True, 
-    topic: str = None, 
-    description: str = None,
-    add_time: float = None
-):
+        chat_id: int,
+        lang: str = "eng",
+        active: bool = True,
+        topic: str = None,
+        description: str = None,
+        add_time: float = None,
+        style: str = "default"
+    ):
+    if add_time is None:
+        add_time = time.time()
+
     async with aiosqlite.connect("groups.db") as db:
         await db.execute("""
             INSERT OR REPLACE INTO groups 
-            (chat_id, lang, active, topic, description, add_time)
-            VALUES (?, ?, ?, ?, ?, ?)
-        """, (chat_id, lang, active, topic, description, add_time or time.time()))
+            (chat_id, lang, active, topic, description, add_time, style)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """, (chat_id, lang, active, topic, description, add_time, style))
         await db.commit()
 
 async def deactivate_group(chat_id: int):

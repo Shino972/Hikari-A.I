@@ -14,21 +14,24 @@ PROMPT_STYLES = {
         "files": {
             "eng": "prompt_eng.txt",
             "rus": "prompt_rus.txt",
-            "chi": "prompt_chi.txt"
+            "chi": "prompt_chi.txt",
+            "ukr": "promt_ukr.txt"
         }
     },
     "cute": {
         "files": {
             "eng": "cute_prompt_eng.txt",
             "rus": "cute_prompt_rus.txt",
-            "chi": "cute_prompt_chi.txt"
+            "chi": "cute_prompt_chi.txt",
+            "ukr": "cute_prompt_ukr.txt"
         }
     },
     "cheeky": {
         "files": {
             "eng": "cheeky_prompt_eng.txt",
             "rus": "cheeky_prompt_rus.txt",
-            "chi": "cheeky_prompt_chi.txt"
+            "chi": "cheeky_prompt_chi.txt",
+            "ukr": "cheeky_prompt_ukr.txt"
         }
     }
 }
