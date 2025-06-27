@@ -58,3 +58,24 @@ async def get_group_add_time(chat_id: int) -> float | None:
         async with db.execute("SELECT add_time FROM groups WHERE chat_id = ?", (chat_id,)) as cursor:
             row = await cursor.fetchone()
             return row[0] if row else None
+        
+async def get_group_style(chat_id: int) -> str | None:
+    async with aiosqlite.connect("groups.db") as db:
+        async with db.execute("SELECT style FROM groups WHERE chat_id = ?", (chat_id,)) as cursor:
+            row = await cursor.fetchone()
+            return row[0] if row else None
+
+async def set_group_style(chat_id: int, style: str):
+    async with aiosqlite.connect("groups.db") as db:
+        cursor = await db.execute("PRAGMA table_info(groups)")
+        columns = await cursor.fetchall()
+        has_style_column = any(col[1] == 'style' for col in columns)
+        
+        if not has_style_column:
+            await db.execute("ALTER TABLE groups ADD COLUMN style TEXT DEFAULT 'default'")
+            await db.commit()
+        
+        await db.execute("""
+            UPDATE groups SET style = ? WHERE chat_id = ?
+        """, (style, chat_id))
+        await db.commit()

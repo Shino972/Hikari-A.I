@@ -5,9 +5,9 @@
     "chi": "<b>👋 選擇語言</b>"
   },
   "language_selected": {
-    "rus": "<b>Язык установлен: Русский 🇷🇺</b>",
-    "eng": "<b>Language set: English 🇬🇧</b>",
-    "chi": "<b>語言已設置：中文 🇨🇳</b>"
+    "rus": "Язык установлен: Русский 🇷🇺",
+    "eng": "Language set: English 🇬🇧",
+    "chi": "語言已設置：中文 🇨🇳"
   },
   "welcome": {  
     "rus": "🤖 Я — <b>Hikari A.I.</b>\nУмный, стильный Развлекательный Бот, который умеет:\n• Делать яркие дайджесты чатов \n• Анализировать атмосферу группы \n• Подстраиваться под стиль общения \n\nЯ каждые 24 часа выкладываю дайджест, изучая 1000 последних сообщений чата!\n Добавь меня в группу — и я покажу, на что способен!",  
@@ -108,5 +108,40 @@
       "rus": "Женский",
       "eng": "Female",
       "chi": "女"
+  },
+  "lang_change_prompt": {
+      "eng": "<b>Please select a group language:</b>",
+      "rus": "<b>Пожалуйста, выберите язык группы:</b>",
+      "chi": "<b>請選擇群組語言：</b>"
+  },
+  "lang_change_success": {
+      "eng": "<b>✅ Group language has been changed to English.</b>",
+      "rus": "<b>✅ Язык группы изменен на Русский.</b>",
+      "chi": "<b>✅ 群組語言已更改為中文。</b>"
+  },
+  "select_style": {
+      "eng": "<b>Please select a digest style:</b>",
+      "rus": "<b>Пожалуйста, выберите стиль обзора:</b>",
+      "chi": "<b>請選擇概覽風格：</b>"
+  },
+  "style_changed": {
+      "eng": "✅ Digest style has been changed to: {style}",
+      "rus": "✅ Стиль обзора изменён на: {style}",
+      "chi": "✅ 概览风格已更改为: {style}"
+  },
+  "style_default": {
+      "eng": "Auto",
+      "rus": "Авто",
+      "chi": "自动的"
+  },
+  "style_cute": {
+      "eng": "Cute",
+      "rus": "Милый",
+      "chi": "可爱"
+  },
+  "style_cheeky": {
+      "eng": "Cheeky",
+      "rus": "Наглый",
+      "chi": "厚脸皮"
   }
 }

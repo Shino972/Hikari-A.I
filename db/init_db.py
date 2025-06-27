@@ -18,7 +18,8 @@ async def init_db():
                 active BOOLEAN DEFAULT 1,
                 topic TEXT DEFAULT NULL,
                 description TEXT DEFAULT NULL,
-                add_time REAL DEFAULT NULL
+                add_time REAL DEFAULT NULL,
+                style TEXT DEFAULT 'default'
             )
         """)
         await db.commit()

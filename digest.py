@@ -7,6 +7,10 @@ from asyncio import sleep
 from openai import AsyncOpenAI
 from aiogram import Bot
 
+
+from db.group import get_group_style
+from config import PROMPT_STYLES
+
 from db.group import get_group_lang
 from db.json_storage import clear_processed_messages, load_messages
 from config import OPENAI_API_KEY, OPENAI_BASE_URL
@@ -40,10 +44,14 @@ async def generate_digest(chat_id: int):
         return None
     
     lang = await get_group_lang(chat_id)
-    prompt_file = f"prompts/prompt_{lang}.txt"
+    style = await get_group_style(chat_id) or "default"
+    
+    prompt_file = f"prompts/{PROMPT_STYLES[style]['files'][lang]}"
     
     if not Path(prompt_file).exists():
-        prompt_file = "prompts/prompt_eng.txt"
+        prompt_file = f"prompts/prompt_{lang}.txt"
+        if not Path(prompt_file).exists():
+            prompt_file = "prompts/prompt_eng.txt"
 
     def sanitize_message(msg):
         sanitized = msg.copy()
@@ -97,7 +105,7 @@ async def digest_scheduler(bot: Bot):
                                 await bot.pin_chat_message(
                                     chat_id=chat_id,
                                     message_id=sent_message.message_id,
-                                    disable_notification=False, web_page_preview=False
+                                    disable_notification=False
                                 )
                                 first_message_sent = True
                             except Exception as pin_error:
