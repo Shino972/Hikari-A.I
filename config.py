@@ -9,6 +9,8 @@ PARSE_MODE = "HTML"
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL")
 
+model = "google/gemini-2.0-flash-exp:free"
+
 PROMPT_STYLES = {
     "default": {
         "files": {

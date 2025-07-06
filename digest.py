@@ -13,7 +13,7 @@ from config import PROMPT_STYLES
 
 from db.group import get_group_lang
 from db.json_storage import clear_processed_messages, load_messages
-from config import OPENAI_API_KEY, OPENAI_BASE_URL
+from config import OPENAI_API_KEY, OPENAI_BASE_URL, model
 
 async def calculate_digest_time(chat_id: int) -> float:
     from db.group import get_group_add_time
@@ -77,14 +77,20 @@ async def generate_digest(chat_id: int):
     ]
 
     response = await client.chat.completions.create(
-        model="google/gemini-2.0-flash-exp:free",
+        model=model,
         messages=messages,
-        temperature=1.0,
+        temperature=0.3,
         top_p=0.95,
-        max_tokens=8192
+        max_tokens=8192,
+        stream=False
     )
+    
+    full_response = ""
+    if response.choices and response.choices[0].message:
+        full_response = response.choices[0].message.content
+    
     clear_processed_messages(chat_id)
-    return response.choices[0].message.content
+    return full_response
 
 async def digest_scheduler(bot: Bot):
     while True:
