@@ -12,6 +12,60 @@ router = Router()
 
 generating_digests = {}
 
+async def send_digest_with_retries(message: types.Message, max_attempts: int = 5):
+    lang = await get_group_lang(message.chat.id) or "eng"
+    attempt = 0
+    last_error = None
+    
+    while attempt < max_attempts:
+        try:
+            digest = await generate_digest(message.chat.id)
+            if not digest or not digest.strip():
+                await message.answer(t("digest_empty", lang))
+                return False
+                
+            await set_cooldown(message.chat.id, "digest", 14400)
+            
+            message_parts = await split_long_message(digest)
+            if not message_parts:
+                await message.answer(t("digest_empty", lang))
+                return False
+
+            first_message_sent = False
+            for part in message_parts:
+                if not part.strip():
+                    continue
+                    
+                try:
+                    sent_message = await message.answer(part) 
+                    if not first_message_sent:
+                        try:
+                            await message.bot.pin_chat_message(
+                                chat_id=message.chat.id,
+                                message_id=sent_message.message_id,
+                                disable_notification=False, 
+                                disable_web_page_preview=True
+                            )
+                            first_message_sent = True
+                        except Exception as pin_error:
+                            print(f"Failed to pin message: {pin_error}")
+                            first_message_sent = True
+                    await sleep(0.5)
+                except Exception as send_error:
+                    print(f"Failed to send message part: {send_error}")
+                    continue
+            
+            return True
+            
+        except Exception as e:
+            attempt += 1
+            last_error = e
+            if attempt < max_attempts:
+                await sleep(5 * attempt)
+    
+    await message.answer(t("digest_error", lang))
+    return False
+
 @router.message(Command("digest"))
 async def manual_digest(message: types.Message):
     lang = await get_group_lang(message.chat.id) or "eng"
@@ -41,49 +95,12 @@ async def manual_digest(message: types.Message):
         return
 
     generating_digests[message.chat.id] = True
-
     generating_message = await message.answer(t("digest_generating", lang))
 
     try:
-        digest = await generate_digest(message.chat.id)
-        if not digest or not digest.strip():
-            await message.answer(t("digest_empty", lang))
-            return
-
-        await set_cooldown(message.chat.id, "digest", 14400)
-        
-        message_parts = await split_long_message(digest)
-        if not message_parts:
-            await message.answer(t("digest_empty", lang))
-            return
-
-        first_message_sent = False
-        for part in message_parts:
-            if not part.strip():
-                continue
-                
-            try:
-                sent_message = await message.answer(part) 
-                if not first_message_sent:
-                    try:
-                        await message.bot.pin_chat_message(
-                            chat_id=message.chat.id,
-                            message_id=sent_message.message_id,
-                            disable_notification=False
-                        )
-                        first_message_sent = True
-                    except Exception as pin_error:
-                        print(f"Failed to pin message: {pin_error}")
-                        first_message_sent = True
-                await sleep(0.5)
-            except Exception as send_error:
-                print(f"Failed to send message part: {send_error}")
-                continue
-        
-        await generating_message.delete()
-        
-    except Exception as e:
-        print(f"[manual_digest] error in {message.chat.id}: {e}")
+        await send_digest_with_retries(message)
+    except Exception:
         await message.answer(t("digest_error", lang))
     finally:
         generating_digests.pop(message.chat.id, None)
+        await generating_message.delete()

@@ -92,6 +92,43 @@ async def generate_digest(chat_id: int):
     clear_processed_messages(chat_id)
     return full_response
 
+async def send_digest_with_retries(bot: Bot, chat_id: int, max_attempts: int = 5):
+    attempt = 0
+    last_error = None
+    
+    while attempt < max_attempts:
+        try:
+            digest = await generate_digest(chat_id)
+            if not digest:
+                return False
+                
+            message_parts = await split_long_message(digest)
+            first_message_sent = False
+            
+            for part in message_parts:
+                sent_message = await bot.send_message(chat_id, part)
+                if not first_message_sent:
+                    try:
+                        await bot.pin_chat_message(
+                            chat_id=chat_id,
+                            message_id=sent_message.message_id,
+                            disable_notification=False, disable_web_page_preview=True
+                        )
+                        first_message_sent = True
+                    except Exception:
+                        first_message_sent = True
+                await sleep(0.5)
+            
+            return True
+            
+        except Exception as e:
+            attempt += 1
+            last_error = e
+            if attempt < max_attempts:
+                await sleep(5 * attempt)
+    
+    return False
+
 async def digest_scheduler(bot: Bot):
     while True:
         await asyncio.sleep(86400)
@@ -100,23 +137,6 @@ async def digest_scheduler(bot: Bot):
         active_groups = await get_active_groups()
         for chat_id in active_groups:
             try:
-                digest = await generate_digest(chat_id)
-                if digest:
-                    message_parts = await split_long_message(digest)
-                    first_message_sent = False
-                    for part in message_parts:
-                        sent_message = await bot.send_message(chat_id, part)
-                        if not first_message_sent:
-                            try:
-                                await bot.pin_chat_message(
-                                    chat_id=chat_id,
-                                    message_id=sent_message.message_id,
-                                    disable_notification=False
-                                )
-                                first_message_sent = True
-                            except Exception as pin_error:
-                                print(f"Failed to pin message: {pin_error}")
-                                first_message_sent = True
-                        await sleep(0.5)
-            except Exception as e:
-                print(f"[digest_scheduler] error in {chat_id}: {e}")
+                await send_digest_with_retries(bot, chat_id)
+            except Exception:
+                pass
